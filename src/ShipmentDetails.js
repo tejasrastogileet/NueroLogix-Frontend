@@ -15,7 +15,6 @@ export default function ShipmentDetails() {
   const [locking, setLocking] = useState(false);
   const [releasing, setReleasing] = useState(false);
 
-  // ✅ Fetch shipment details
   useEffect(() => {
     fetch('http://localhost:5000/api/shipments/${id}')
       .then((res) => res.json())
@@ -26,7 +25,6 @@ export default function ShipmentDetails() {
       .catch((err) => console.error("Error fetching shipment:", err));
   }, [id]);
 
-  // ✅ Update status
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     try {
@@ -44,7 +42,6 @@ export default function ShipmentDetails() {
     }
   };
 
-  // ✅ Lock funds manually
   const handleLockFunds = async () => {
     if (!wallet.connected) return alert("⚠ Please connect your wallet first!");
     setLocking(true);
@@ -60,7 +57,6 @@ export default function ShipmentDetails() {
     setLocking(false);
   };
 
-  // ✅ Release funds manually
   const handleReleaseFunds = async () => {
     if (!wallet.connected) return alert("⚠ Connect your wallet first!");
     if (!shipment?.sellerWallet) {
@@ -80,7 +76,6 @@ export default function ShipmentDetails() {
     setReleasing(false);
   };
 
-  // ✅ Manual Seller Wallet Update (Modified)
   const handleSellerWalletSave = async () => {
     if (!sellerWalletInput)
       return alert("⚠ Please enter a seller wallet address!");

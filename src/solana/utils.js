@@ -2,7 +2,6 @@ import { Connection, PublicKey, SystemProgram, Transaction } from "@solana/web3.
 
 const NETWORK = "https://api.devnet.solana.com";
 
-// 🔹 Lock funds (buyer → escrow)
 export async function lockFunds(wallet, escrowAddress, amountSol) {
   try {
     if (!wallet?.publicKey) throw new Error("Wallet not connected");
@@ -25,16 +24,15 @@ export async function lockFunds(wallet, escrowAddress, amountSol) {
     const signature = await wallet.sendTransaction(tx, connection);
     await connection.confirmTransaction(signature, "confirmed");
 
-    console.log("✅ Funds Locked | Tx Signature:", signature);
+    console.log("Funds Locked | Tx Signature:", signature);
     return signature;
 
   } catch (err) {
-    console.error("❌ Failed to lock funds:", err.message);
+    console.error("Failed to lock funds:", err.message);
     throw new Error("Failed to lock funds: " + err.message);
   }
 }
 
-// 🔹 Release funds (escrow → seller)
 export async function releaseFunds(wallet, sellerAddress, amountSol) {
   try {
     if (!wallet?.publicKey) throw new Error("Wallet not connected");
@@ -57,11 +55,11 @@ export async function releaseFunds(wallet, sellerAddress, amountSol) {
     const signature = await wallet.sendTransaction(tx, connection);
     await connection.confirmTransaction(signature, "confirmed");
 
-    console.log("✅ Funds Released | Tx Signature:", signature);
+    console.log("Funds Released | Tx Signature:", signature);
     return signature;
 
   } catch (err) {
-    console.error("❌ Failed to release funds:", err.message);
+    console.error("Failed to release funds:", err.message);
     throw new Error("Failed to release funds: " + err.message);
   }
 }

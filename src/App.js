@@ -5,7 +5,6 @@ import Dashboard from "./Dashboard";
 import ShipmentDetails from "./ShipmentDetails";
 import AddShipment from "./AddShipment";
 
-// 🟣 Solana Wallet Imports
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
@@ -15,14 +14,10 @@ import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 export default function App() {
-  // Solana endpoint (Devnet)
   const endpoint = clusterApiUrl("devnet");
-
-  // Available wallet adapters
   const wallets = [new PhantomWalletAdapter()];
 
   return (
-    // 🟣 Wrap the whole app in Solana Wallet Context
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>

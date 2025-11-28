@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import { createShipment } from "./api/shipmentAPI"; // ✅ fixed import path
+import { createShipment } from "./api/shipmentAPI";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { lockFunds } from "./solana/utils"; // ✅ fixed import path
+import { lockFunds } from "./solana/utils";
 
 const ESCROW_ACCOUNT = process.env.REACT_APP_ESCROW_ACCOUNT;
 
@@ -21,7 +21,6 @@ export default function AddShipment() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔒 Lock funds to escrow
   const handleLockFunds = useCallback(async () => {
     if (!wallet.connected) {
       alert("⚠ Please connect your Phantom wallet first!");
@@ -38,7 +37,6 @@ export default function AddShipment() {
     }
   }, [wallet, form]);
 
-  // 🚀 Create Shipment
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

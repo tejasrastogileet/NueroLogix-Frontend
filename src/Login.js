@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { signup, login } from "./api/auth"; // 👈 Added backend integration
+import { signup, login } from "./api/auth";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -18,7 +18,6 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ✅ Backend-connected handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,12 +25,12 @@ const Login = () => {
       if (isSignup) {
         const res = await signup(formData);
         alert(res.data.message);
-        setIsSignup(false); // switch to login mode
+        setIsSignup(false);
       } else {
         const res = await login(formData);
         alert(res.data.message);
         localStorage.setItem("token", res.data.token);
-        navigate("/dashboard"); // navigate after successful login
+        navigate("/dashboard");
       }
     } catch (err) {
       alert(err.response?.data?.message || "Something went wrong");
@@ -44,7 +43,6 @@ const Login = () => {
       {/* Background gradient glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-purple-900/30 to-black blur-3xl" />
 
-      {/* Glass card */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

@@ -4,20 +4,20 @@ import { Brain, Lock, LineChart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useGlobalWallet } from "./context/WalletContext"; // 🟣 import global wallet context
+import { useGlobalWallet } from "./context/WalletContext";
 
 const Landing = () => {
   const navigate = useNavigate();
   const { connected, publicKey } = useWallet();
-  const { setWalletAddress } = useGlobalWallet(); // 🟣 access setter from context
+  const { setWalletAddress } = useGlobalWallet();
 
   // ✅ When wallet connects, store both in localStorage & global context
   useEffect(() => {
     if (connected && publicKey) {
       const address = publicKey.toBase58();
       localStorage.setItem("walletAddress", address);
-      setWalletAddress(address); // 🟣 update context globally
-      console.log("💾 Wallet connected:", address);
+      setWalletAddress(address);
+      console.log("Wallet connected:", address);
     }
   }, [connected, publicKey, setWalletAddress]);
 
@@ -25,7 +25,6 @@ const Landing = () => {
     <div className="min-h-screen bg-[#050505] text-white flex flex-col relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-cyan-900/10 to-black blur-3xl" />
 
-      {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 backdrop-blur-lg bg-black/30 border-b border-white/10 flex justify-between items-center px-8 py-4">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
           NeuroLogix
@@ -39,14 +38,12 @@ const Landing = () => {
             Login / Sign Up
           </button>
 
-          {/* ✅ Phantom Connect Button */}
           <div className="rounded-lg overflow-hidden">
             <WalletMultiButton className="!bg-gradient-to-r !from-cyan-400 !to-purple-500 !text-black !font-semibold !px-4 !py-2 !rounded-lg !hover:opacity-90 transition" />
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="flex flex-col justify-center items-center text-center px-6 mt-32 md:mt-40 z-10">
         <motion.h1
           className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-500 via-cyan-400 to-green-400 bg-clip-text text-transparent"
@@ -87,7 +84,6 @@ const Landing = () => {
           </button>
         </motion.div>
 
-        {/* ✅ Show wallet info when connected */}
         {connected && publicKey && (
           <p className="mt-8 text-gray-400 text-sm">
             ✅ Connected Wallet:{" "}

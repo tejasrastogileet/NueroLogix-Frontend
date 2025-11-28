@@ -13,12 +13,10 @@ export default function ChatBubble() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // 🔁 Auto-scroll to bottom when new message arrives
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // 📤 Send message to backend
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -49,7 +47,6 @@ export default function ChatBubble() {
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
-      {/* 💬 Chat Window */}
       {isOpen && (
         <div className="bg-gray-800 text-white w-80 h-96 p-4 rounded-2xl shadow-2xl flex flex-col border border-gray-700">
           <div className="flex justify-between items-center mb-2 border-b border-gray-700 pb-1">
@@ -62,7 +59,6 @@ export default function ChatBubble() {
             </button>
           </div>
 
-          {/* 💭 Messages */}
           <div className="flex-1 overflow-y-auto space-y-2 mb-2">
             {messages.map((msg, i) => (
               <div
@@ -84,7 +80,6 @@ export default function ChatBubble() {
             <div ref={chatEndRef} />
           </div>
 
-          {/* 🧠 Input Field */}
           <div className="flex">
             <input
               type="text"

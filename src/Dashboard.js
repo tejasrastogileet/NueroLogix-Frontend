@@ -12,7 +12,6 @@ export default function Dashboard() {
   const wallet = useWallet();
   const NETWORK = "https://api.devnet.solana.com";
 
-  // 🔹 Fetch Shipments from Backend
   useEffect(() => {
     const fetchShipments = async () => {
       try {
@@ -37,7 +36,6 @@ export default function Dashboard() {
     fetchShipments();
   }, []);
 
-  // 🟢 Release Funds Function
   const handleReleaseFunds = useCallback(
     async (sellerWalletAddress) => {
       if (!wallet.connected) {
@@ -73,7 +71,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 relative">
-      {/* 🔝 Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">🚚 Shipment Dashboard</h1>
         <Link to="/add-shipment">
@@ -83,17 +80,14 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      {/* 🧠 AI Risk Prediction */}
       <RiskCard shipments={shipments} />
 
-      {/* 🚀 Shipment List */}
       <div className="space-y-4 mt-4">
         {Array.isArray(shipments) && shipments.length > 0 ? (
           shipments.map((shipment) => (
             <div key={shipment._id} className="bg-gray-800 p-4 rounded-xl">
               <ShipmentCard shipment={shipment} />
 
-              {/* 🔓 Release Funds Button for Seller */}
               {shipment.sellerWallet && (
                 <button
                   onClick={() => handleReleaseFunds(shipment.sellerWallet)}
@@ -109,7 +103,6 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* 💬 AI Chat Assistant */}
       <ChatBubble />
     </div>
   );

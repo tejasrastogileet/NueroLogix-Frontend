@@ -5,7 +5,6 @@ export default function RiskCard({ shipments = [] }) {
   const [riskData, setRiskData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // 🧠 Fetch AI Risk Prediction from your Mistral backend
   const fetchRisk = async () => {
     if (shipments.length === 0) return;
     setLoading(true);
@@ -32,7 +31,6 @@ export default function RiskCard({ shipments = [] }) {
     }
   };
 
-  // 🔁 Auto-refresh every 60s
   useEffect(() => {
     fetchRisk();
     const interval = setInterval(fetchRisk, 60000);
