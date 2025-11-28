@@ -24,7 +24,7 @@ export default function RiskCard({ shipments = [] }) {
 
       setRiskData(res.data);
     } catch (err) {
-      console.error("❌ Risk fetch error:", err);
+      console.error("Risk fetch error:", err);
       setRiskData({ riskLevel: "Unknown", reason: "Backend not reachable" });
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ export default function RiskCard({ shipments = [] }) {
 
   return (
     <div className="bg-gray-800 text-white p-5 rounded-2xl shadow-xl mb-6">
-      <h2 className="text-xl font-semibold mb-3">🧠 AI Risk Prediction</h2>
+      <h2 className="text-xl font-semibold mb-3">AI Risk Prediction</h2>
 
       {loading ? (
         <p className="text-gray-400">Analyzing latest shipment risk...</p>
@@ -63,7 +63,7 @@ export default function RiskCard({ shipments = [] }) {
             <strong>Reason:</strong> {riskData.reason}
           </p>
           <p className="text-xs text-gray-400 italic">
-            Auto-updates every 1 minute ⏱️
+            Auto-updates every 1 minute
           </p>
         </div>
       ) : (

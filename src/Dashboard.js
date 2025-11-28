@@ -16,9 +16,8 @@ export default function Dashboard() {
     const fetchShipments = async () => {
       try {
         const res = await getShipments();
-        console.log("🚚 Shipments API Response:", res);
+        console.log("Shipments API Response:", res);
 
-        // ✅ Handle all possible response formats
         if (Array.isArray(res)) {
           setShipments(res);
         } else if (Array.isArray(res.data)) {
@@ -26,11 +25,11 @@ export default function Dashboard() {
         } else if (Array.isArray(res.shipments)) {
           setShipments(res.shipments);
         } else {
-          console.warn("⚠️ Unexpected response format:", res);
+          console.warn("Unexpected response format:", res);
           setShipments([]);
         }
       } catch (err) {
-        console.error("❌ Error fetching shipments:", err);
+        console.error("Error fetching shipments:", err);
       }
     };
     fetchShipments();
@@ -39,7 +38,7 @@ export default function Dashboard() {
   const handleReleaseFunds = useCallback(
     async (sellerWalletAddress) => {
       if (!wallet.connected) {
-        alert("⚠️ Please connect your wallet first!");
+        alert("Please connect your wallet first!");
         return;
       }
 
@@ -47,22 +46,21 @@ export default function Dashboard() {
         const connection = new Connection(NETWORK, "confirmed");
         const sellerPubKey = new PublicKey(sellerWalletAddress);
 
-        // 💸 Transfer from buyer → seller (demo)
         const transaction = new Transaction().add(
           SystemProgram.transfer({
             fromPubkey: wallet.publicKey,
             toPubkey: sellerPubKey,
-            lamports: 0.1 * 1e9, // 0.1 SOL — change as needed
+            lamports: 0.1 * 1e9,
           })
         );
 
         const signature = await wallet.sendTransaction(transaction, connection);
         await connection.confirmTransaction(signature, "confirmed");
 
-        alert(`✅ Funds released to seller!\nTx Signature: ${signature}`);
-        console.log("✅ Transaction confirmed:", signature);
+        alert(`Funds released to seller!\nTx Signature: ${signature}`);
+        console.log("Transaction confirmed:", signature);
       } catch (err) {
-        console.error("❌ Release error:", err);
+        console.error("Release error:", err);
         alert("Failed to release funds: " + err.message);
       }
     },
@@ -72,7 +70,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8 relative">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">🚚 Shipment Dashboard</h1>
+        <h1 className="text-3xl font-bold">Shipment Dashboard</h1>
         <Link to="/add-shipment">
           <button className="bg-purple-600 px-4 py-2 rounded hover:bg-purple-700 transition-all">
             + Add Shipment
@@ -93,7 +91,7 @@ export default function Dashboard() {
                   onClick={() => handleReleaseFunds(shipment.sellerWallet)}
                   className="mt-3 bg-green-600 px-4 py-2 rounded hover:bg-green-700 transition-all"
                 >
-                  🔓 Release Funds to Seller
+                  Release Funds to Seller
                 </button>
               )}
             </div>

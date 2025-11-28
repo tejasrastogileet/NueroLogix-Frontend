@@ -11,7 +11,7 @@ export default function ShipmentDetails() {
   const wallet = useWallet();
 
   const [shipment, setShipment] = useState(null);
-  const [sellerWalletInput, setSellerWalletInput] = useState(""); // 🆕 Manual entry field
+  const [sellerWalletInput, setSellerWalletInput] = useState("");
   const [locking, setLocking] = useState(false);
   const [releasing, setReleasing] = useState(false);
 
@@ -35,15 +35,15 @@ export default function ShipmentDetails() {
         await handleReleaseFunds();
       }
 
-      alert("✅ Status updated!");
+      alert("Status updated!");
     } catch (err) {
       console.error(err);
-      alert("❌ Error updating status");
+      alert("Error updating status");
     }
   };
 
   const handleLockFunds = async () => {
-    if (!wallet.connected) return alert("⚠ Please connect your wallet first!");
+    if (!wallet.connected) return alert("Please connect your wallet first!");
     setLocking(true);
     try {
       const signature = await lockFunds(wallet, ESCROW_ACCOUNT, 0.01);
@@ -52,15 +52,15 @@ export default function ShipmentDetails() {
       setShipment((prev) => ({ ...prev, status: "Payment Locked" }));
     } catch (err) {
       console.error("Error locking funds:", err);
-      alert("❌ Error locking funds: " + err.message);
+      alert("Error locking funds: " + err.message);
     }
     setLocking(false);
   };
 
   const handleReleaseFunds = async () => {
-    if (!wallet.connected) return alert("⚠ Connect your wallet first!");
+    if (!wallet.connected) return alert("Connect your wallet first!");
     if (!shipment?.sellerWallet) {
-      alert("❌ Seller wallet address missing in shipment data!");
+      alert("Seller wallet address missing in shipment data!");
       console.error("Seller wallet undefined:", shipment);
       return;
     }
@@ -71,14 +71,14 @@ export default function ShipmentDetails() {
       alert("💸 Funds released successfully! Tx: " + signature);
     } catch (err) {
       console.error("Error releasing funds:", err);
-      alert("❌ Error releasing funds: " + err.message);
+      alert("Error releasing funds: " + err.message);
     }
     setReleasing(false);
   };
 
   const handleSellerWalletSave = async () => {
     if (!sellerWalletInput)
-      return alert("⚠ Please enter a seller wallet address!");
+      return alert("Please enter a seller wallet address!");
 
     try {
       const res = await fetch(
@@ -93,15 +93,15 @@ export default function ShipmentDetails() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("✅ Seller wallet updated successfully!");
+        alert("Seller wallet updated successfully!");
         setShipment((prev) => ({ ...prev, sellerWallet: sellerWalletInput }));
         setSellerWalletInput("");
       } else {
-        alert("❌ Failed to update wallet: " + (data.message || "Unknown error"));
+        alert("Failed to update wallet: " + (data.message || "Unknown error"));
       }
     } catch (err) {
       console.error("Error updating seller wallet:", err);
-      alert("❌ Error: " + err.message);
+      alert("Error: " + err.message);
     }
   };
 
@@ -117,11 +117,10 @@ export default function ShipmentDetails() {
         <p><strong>Destination:</strong> {shipment.destination}</p>
         <p>
           <strong>Seller Wallet:</strong>{" "}
-          {shipment.sellerWallet || "❌ Missing"}
+          {shipment.sellerWallet || "Missing"}
         </p>
         <p><strong>Status:</strong> {shipment.status}</p>
 
-        {/* 🆕 Manual Seller Wallet Input */}
         {!shipment.sellerWallet && (
           <div className="mt-4 p-4 bg-yellow-100 text-gray-900 rounded-lg">
             <p className="font-semibold mb-2">Seller Wallet Missing!</p>
@@ -156,7 +155,6 @@ export default function ShipmentDetails() {
           </select>
         </div>
 
-        {/* Blockchain Escrow Section */}
         <div className="mt-8 border-t border-gray-700 pt-6">
           <h2 className="text-xl font-semibold mb-2">Blockchain Escrow</h2>
 
@@ -172,7 +170,7 @@ export default function ShipmentDetails() {
                 disabled={locking}
                 className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold mr-3"
               >
-                {locking ? "Locking..." : "🔒 Lock Funds (0.01 SOL)"}
+                {locking ? "Locking..." : "Lock Funds (0.01 SOL)"}
               </button>
 
               <button
@@ -185,7 +183,7 @@ export default function ShipmentDetails() {
             </div>
           ) : (
             <p className="text-gray-400 mt-2">
-              ⚠ Connect Phantom wallet to continue.
+              Connect Phantom wallet to continue.
             </p>
           )}
         </div>

@@ -40,7 +40,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#050505] relative overflow-hidden">
-      {/* Background gradient glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-purple-900/30 to-black blur-3xl" />
 
       <motion.div
@@ -54,7 +53,6 @@ const Login = () => {
         </h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          {/* Email */}
           <div>
             <label className="text-sm text-gray-300">Email</label>
             <div className="flex items-center bg-black/30 border border-white/20 rounded-lg px-3 py-2 mt-1">
@@ -71,7 +69,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Password */}
           <div>
             <label className="text-sm text-gray-300">Password</label>
             <div className="flex items-center bg-black/30 border border-white/20 rounded-lg px-3 py-2 mt-1">
@@ -88,7 +85,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Role Dropdown */}
           <div>
             <label className="text-sm text-gray-300">Select Role</label>
             <div className="flex items-center bg-black/30 border border-white/20 rounded-lg px-3 py-2 mt-1">
@@ -105,7 +101,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             type="submit"
@@ -115,7 +110,6 @@ const Login = () => {
           </motion.button>
         </form>
 
-        {/* Toggle Link */}
         <p className="text-center text-gray-400 text-sm mt-6">
           {isSignup ? "Already have an account?" : "Don’t have an account?"}{" "}
           <button
@@ -126,7 +120,6 @@ const Login = () => {
           </button>
         </p>
 
-        {/* Back to Home */}
         <div className="text-center mt-4">
           <button
             onClick={() => navigate("/")}

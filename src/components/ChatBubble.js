@@ -38,7 +38,7 @@ export default function ChatBubble() {
       console.error("Chat Error:", err);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "⚠️ AI server is unavailable right now." },
+        { sender: "bot", text: "AI server is unavailable right now." },
       ]);
     } finally {
       setLoading(false);
@@ -100,7 +100,6 @@ export default function ChatBubble() {
         </div>
       )}
 
-      {/* 🟣 Floating Chat Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}

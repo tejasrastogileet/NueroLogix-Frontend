@@ -23,7 +23,7 @@ export default function AddShipment() {
 
   const handleLockFunds = useCallback(async () => {
     if (!wallet.connected) {
-      alert("⚠ Please connect your Phantom wallet first!");
+      alert("Please connect your Phantom wallet first!");
       return;
     }
 
@@ -32,7 +32,7 @@ export default function AddShipment() {
       alert('Funds locked successfully!\nTransaction: ${signature}');
       return signature;
     } catch (err) {
-      console.error("❌ Escrow Lock Error:", err);
+      console.error("Escrow Lock Error:", err);
       alert("Failed to lock funds: " + err.message);
     }
   }, [wallet, form]);
@@ -49,7 +49,7 @@ export default function AddShipment() {
         txSignature,
       });
 
-      alert("🚀 Shipment created & funds locked successfully!");
+      alert("Shipment created & funds locked successfully!");
       setForm({
         trackingId: "",
         origin: "",
@@ -59,7 +59,7 @@ export default function AddShipment() {
         status: "Pending",
       });
     } catch (err) {
-      console.error("❌ Error creating shipment:", err);
+      console.error("Error creating shipment:", err);
       alert("Error creating shipment");
     }
   };
@@ -67,7 +67,7 @@ export default function AddShipment() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl w-96 shadow-lg">
-        <h1 className="text-2xl font-bold mb-6 text-center">📦 Create Shipment (Buyer)</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Shipment (Buyer)</h1>
 
         <input
           name="trackingId"
@@ -115,7 +115,7 @@ export default function AddShipment() {
           type="submit"
           className="w-full bg-purple-600 py-2 rounded hover:bg-purple-700 transition-all font-semibold"
         >
-          🚀 Lock Funds & Create Shipment
+          Lock Funds & Create Shipment
         </button>
       </form>
     </div>

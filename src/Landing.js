@@ -11,7 +11,6 @@ const Landing = () => {
   const { connected, publicKey } = useWallet();
   const { setWalletAddress } = useGlobalWallet();
 
-  // ✅ When wallet connects, store both in localStorage & global context
   useEffect(() => {
     if (connected && publicKey) {
       const address = publicKey.toBase58();
@@ -86,7 +85,7 @@ const Landing = () => {
 
         {connected && publicKey && (
           <p className="mt-8 text-gray-400 text-sm">
-            ✅ Connected Wallet:{" "}
+            Connected Wallet:{" "}
             <span className="text-cyan-400 font-mono">
               {publicKey.toBase58().slice(0, 8)}...
               {publicKey.toBase58().slice(-8)}
@@ -95,7 +94,6 @@ const Landing = () => {
         )}
       </section>
 
-      {/* Features */}
       <section className="grid md:grid-cols-3 gap-8 mt-24 px-8 max-w-7xl mx-auto z-10">
         {[
           {
