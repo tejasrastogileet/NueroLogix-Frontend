@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NeuroLogix
 
-## Available Scripts
+### AI-assisted logistics, with shipment workflows and Solana-powered escrow.
 
-In the project directory, you can run:
+A React frontend for managing shipment records, viewing risk insights, and connecting a Solana wallet to shipment payment flows.
 
-### `npm start`
+[Features](#-features) · [Getting Started](#-getting-started) · [Configuration](#-configuration) · [Project Structure](#-project-structure)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</div>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+NeuroLogix is a logistics project exploring how AI-assisted risk insights and blockchain escrow can support shipment workflows. The frontend provides a landing page, shipment dashboard, shipment creation and detail views, and wallet connection through Solana's Devnet.
 
-### `npm run build`
+> **Project status:** This repository contains the frontend application. It depends on a separately running API for shipment data. Blockchain functionality is configured for Solana Devnet; this project is not audited or intended to manage production funds.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ✨ Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Shipment management** — Create shipments and view shipment details and statuses.
+- **Risk insights UI** — Dashboard components for presenting shipment risk information.
+- **Solana wallet connection** — Connect a Phantom wallet using Solana Wallet Adapter.
+- **Escrow workflow interface** — Initiate shipment-related fund locking and release flows on Devnet.
+- **Responsive interface** — React components styled with Tailwind CSS, with motion effects on the landing page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+AI predictions, shipment records, and transaction behavior may depend on backend services and Solana configuration that are not included in this repository.
 
-### `npm run eject`
+## 🧰 Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React 18 and React Router
+- JavaScript
+- Tailwind CSS
+- Solana Web3.js and Solana Wallet Adapter
+- Axios
+- Framer Motion and React Icons
+- Create React App with `react-app-rewired`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Node.js and npm
+- A compatible Solana wallet, such as Phantom, for wallet features
+- The NeuroLogix backend/API, when using shipment features that require server data
 
-## Learn More
+### Install and run
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/tejasrastogileet/NueroLogix-Frontend.git
+cd NueroLogix-Frontend
+npm install
+cp .env.example .env
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The development server is available at [http://localhost:3000](http://localhost:3000).
 
-### Code Splitting
+### Available scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the development server. |
+| `npm test` | Run the test suite. |
+| `npm run build` | Create an optimized production build in `build/`. |
 
-### Analyzing the Bundle Size
+## ⚙️ Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Copy `.env.example` to `.env` and set values for your environment:
 
-### Making a Progressive Web App
+```dotenv
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_PROGRAM_ID=your-program-id
+REACT_APP_NETWORK=https://api.devnet.solana.com
+REACT_APP_ESCROW_ACCOUNT=your-escrow-account-id
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Run the backend API separately and make sure it is available at the configured API URL.
+- The current frontend API helper uses `http://localhost:5000/api` directly; update `src/api/shipmentAPI.js` if your backend runs elsewhere.
+- The wallet adapter currently connects to Solana Devnet. Use only Devnet wallets and test SOL while developing.
+- Never commit `.env` files, private keys, seed phrases, or other credentials. Frontend environment variables are bundled into the client and must not contain secrets.
 
-### Advanced Configuration
+## 🗺️ Application Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Route | Page |
+| --- | --- |
+| `/` | Landing page |
+| `/login` | Login page |
+| `/dashboard` | Shipment dashboard and risk insights |
+| `/add-shipment` | Create a shipment |
+| `/shipment/:id` | Shipment details and status workflow |
 
-### Deployment
+## 📁 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```text
+src/
+├── api/          # API client and shipment requests
+├── components/   # Reusable UI components
+├── context/      # Shared application context
+├── solana/       # Wallet and Solana transaction utilities
+├── AddShipment.js
+├── Dashboard.js
+├── Landing.js
+├── Login.js
+└── ShipmentDetails.js
+```
 
-### `npm run build` fails to minify
+## 🛡️ Safety & Limitations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This repository is a frontend project and does not include the backend or smart-contract source. Verify the backend, program, transaction details, and wallet prompts independently before signing any transaction. Do not use this prototype with real funds or production shipment data.
+
+## 🤝 Contributing
+
+Contributions and suggestions are welcome. For substantial changes, open an issue first to discuss the proposed work. Please avoid committing credentials or environment-specific configuration.
+
+## 📄 License
+
+No license is currently specified in this repository. Contact the repository owner before redistributing or reusing the code.
